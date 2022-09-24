@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.22.1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.2.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.20.8"></script>
+</head>
+<body>
+  <div id="vis"/>
+  <script>
+    const spec = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Starbuck number of stores by area worldwide in February 2017",
+  "width": 800,
+  "height": 400,
+  "projection": {"type": "equalEarth"},
+  "data": {
+    "url": "https://raw.githubusercontent.com/Paulatang/fit3179-assignment2/main/ne_110m_admin_0_countries.json",
+    "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+  },
+  "transform": [
+    {
+      "lookup": "properties.NAME",
+      "from": {
+        "data": {
+          "url": "https://raw.githubusercontent.com/Paulatang/fit3179-assignment2/main/Cleaned%20Starbuck.csv"
+        },
+        "key": "Country",
+        "fields": ["Number_of_stores", "Area"]
+      }
+    },
+    {
+      "calculate": "datum.Number_of_stores/datum.Area",
+      "as": "Number_of_stores by area"
+    }
+  ],
+  "mark": {"type": "geoshape"},
+  "encoding": {
+    "color": {
+      "field": "Number_of_stores by area",
+      "type": "quantitative",
+      "scale": {
+        "type": "linear",
+        "domain": [0, 0.00001, 0.01],
+        "range": ["red", "orange", "yellow"]
+      }
+    },
+    "tooltip": [
+      {"field": "properties.NAME", "type": "nominal", "title": "Country"},
+      {"field": "Number_of_stores", "type": "quantitative"},
+      {
+        "field": "Area",
+        "type": "quantitative",
+        "title": "Area by square kilometers"
+      },
+      {"field": "Number_of_stores by area", "type": "quantitative"}
+    ]
+  },
+  "config": {}
+};
+    vegaEmbed("#vis", spec, {mode: "vega-lite"}).then(console.log).catch(console.warn);
+  </script>
+</body>
+</html>

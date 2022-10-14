@@ -1,5 +1,13 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": "transparent",
+  "config": {
+    "style": {
+      "cell": {
+        "stroke": "transparent"
+      }
+    }
+  },
   "width": 300,
   "height": 200,
   "title": "Starbucks Ownership",
@@ -50,6 +58,5 @@
       {"field": "Number of Records", "type": "quantitative", "format": ","},
       {"field": "Overall Percentage", "type": "ordinal"}
     ]
-  },
-  "config": {}
+  }
 }

@@ -1,6 +1,14 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 800,
+  "background": "transparent",
+  "config": {
+    "style": {
+      "cell": {
+        "stroke": "transparent"
+      }
+    }
+  },
+  "width": 600,
   "height": 450,
   "title": "Starbuck location worldwide in February 2017",
   "projection": {"type": "equalEarth"},
@@ -27,6 +35,5 @@
         }
       }
     }
-  ],
-  "config": {}
+  ]
 }

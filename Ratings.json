@@ -1,0 +1,146 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": "transparent",
+  "datasets": {
+    "medians": [
+      {
+        "name": "Product Rate:",
+        "median": 4,
+        "low": "Unsatisfied",
+        "high": "Satisfied"
+      },
+      {
+        "name": "Price Rate:",
+        "median": 3,
+        "low": "Unsatisfied",
+        "high": "Satisfied"
+      },
+      {
+        "name": "Promotion Rate:",
+        "median": 4,
+        "low": "Unsatisfied",
+        "high": "Satisfied"
+      },
+      {
+        "name": "Ambiance Rate:",
+        "median": 4,
+        "low": "Unsatisfied",
+        "high": "Satisfied"
+      },
+      {
+        "name": "Wifi Rate:",
+        "median": 3,
+        "low": "Unsatisfied",
+        "high": "Satisfied"
+      },
+      {
+        "name": "Service Rate:",
+        "median": 4,
+        "low": "Unsatisfied",
+        "high": "Satisfied"
+      },
+      {
+        "name": "Choose Rate:",
+        "median": 4,
+        "low": "Unsatisfied",
+        "high": "Satisfied"
+      }
+    ],
+    "values": [
+      {"value": 1, "name": "Product Rate:", "number of rates": 1},
+      {"value": 2, "name": "Product Rate:", "number of rates": 8},
+      {"value": 3, "name": "Product Rate:", "number of rates": 33},
+      {"value": 4, "name": "Product Rate:", "number of rates": 48},
+      {"value": 5, "name": "Product Rate:", "number of rates": 23},
+      {"value": 1, "name": "Price Rate:", "number of rates": 12},
+      {"value": 2, "name": "Price Rate:", "number of rates": 25},
+      {"value": 3, "name": "Price Rate:", "number of rates": 44},
+      {"value": 4, "name": "Price Rate:", "number of rates": 23},
+      {"value": 5, "name": "Price Rate:", "number of rates": 9},
+      {"value": 1, "name": "Promotion Rate:", "number of rates": 4},
+      {"value": 2, "name": "Promotion Rate:", "number of rates": 6},
+      {"value": 3, "name": "Promotion Rate:", "number of rates": 26},
+      {"value": 4, "name": "Promotion Rate:", "number of rates": 41},
+      {"value": 5, "name": "Promotion Rate:", "number of rates": 36},
+      {"value": 1, "name": "Ambiance Rate:", "number of rates": 1},
+      {"value": 2, "name": "Ambiance Rate:", "number of rates": 5},
+      {"value": 3, "name": "Ambiance Rate:", "number of rates": 31},
+      {"value": 4, "name": "Ambiance Rate:", "number of rates": 50},
+      {"value": 5, "name": "Ambiance Rate:", "number of rates": 26},
+      {"value": 1, "name": "Wifi Rate:", "number of rates": 6},
+      {"value": 2, "name": "Wifi Rate:", "number of rates": 13},
+      {"value": 3, "name": "Wifi Rate:", "number of rates": 47},
+      {"value": 4, "name": "Wifi Rate:", "number of rates": 37},
+      {"value": 5, "name": "Wifi Rate:", "number of rates": 10},
+      {"value": 1, "name": "Service Rate:", "number of rates": 0},
+      {"value": 2, "name": "Service Rate:", "number of rates": 4},
+      {"value": 3, "name": "Service Rate:", "number of rates": 36},
+      {"value": 4, "name": "Service Rate:", "number of rates": 50},
+      {"value": 5, "name": "Service Rate:", "number of rates": 23},
+      {"value": 1, "name": "Choose Rate:", "number of rates": 3},
+      {"value": 2, "name": "Choose Rate:", "number of rates": 15},
+      {"value": 3, "name": "Choose Rate:", "number of rates": 34},
+      {"value": 4, "name": "Choose Rate:", "number of rates": 40},
+      {"value": 5, "name": "Choose Rate:", "number of rates": 21}
+    ]
+  },
+  "data": {"name": "medians"},
+  "title": "Questionnaire Ratings",
+  "width": 300,
+  "height": 200,
+  "encoding": {
+    "y": {
+      "field": "name",
+      "type": "nominal",
+      "sort": null,
+      "axis": {
+        "domain": false,
+        "offset": 50,
+        "labelFontWeight": "bold",
+        "ticks": false,
+        "grid": true,
+        "title": null
+      }
+    },
+    "x": {
+      "type": "quantitative",
+      "scale": {"domain": [0, 6]},
+      "axis": {"grid": false, "values": [1, 2, 3, 4, 5], "title": null}
+    }
+  },
+  "view": {"stroke": null},
+  "layer": [
+    {
+      "mark": "circle",
+      "data": {"name": "values"},
+      "transform": [
+        {"filter": "datum.name != 'Toolbar_First'"},
+        {"filter": "datum.name != 'Tablet_First'"},
+        {"filter": "datum.name != 'Participant ID'"}
+      ],
+      "encoding": {
+        "x": {"field": "value"},
+        "size": {
+          "field": "number of rates",
+          "type": "quantitative",
+          "title": "Number of Ratings",
+          "legend": {"offset": 80}
+        },
+        "color": {"value": "#cfa875"}
+      }
+    },
+    {
+      "mark": "tick",
+      "encoding": {"x": {"field": "median"}, "color": {"value": "black"}}
+    },
+    {
+      "mark": {"type": "text", "x": 5, "align": "right"},
+      "encoding": {"text": {"field": "low"}}
+    },
+    {
+      "mark": {"type": "text", "x": 300, "align": "left"},
+      "encoding": {"text": {"field": "high"}}
+    }
+  ],
+  "config": {}
+}

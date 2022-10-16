@@ -1,0 +1,63 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": "transparent",
+  "config": {
+    "style": {
+      "cell": {
+        "stroke": "transparent"
+      }
+    }
+  },
+  "width": 300,
+  "height": 200,
+  "title": "Starbucks Ownership",
+  "data": {
+    "url": "https://raw.githubusercontent.com/Paulatang/fit3179-assignment2/main/OwnershipType%20.csv"
+  },
+  "layer": [
+    {
+      "params": [
+        {
+          "name": "highlight",
+          "select": {"type": "point", "fields": ["Ownership Type"]},
+          "bind": "legend"
+        }
+      ],
+      "mark": {"type": "arc", "innerRadius": 30, "stroke": "#fff"}
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "baseline": "top",
+        "fontSize": 10.5,
+        "fontStyle": "bold",
+        "radiusOffset": 50
+      },
+      "encoding": {"text": {"field": "Ownership Type", "type": "nominal"}}
+    }
+  ],
+  "encoding": {
+    "theta": {
+      "field": "Number of Records",
+      "type": "quantitative",
+      "stack": true
+    },
+    "radius": {
+      "field": "Number of Records",
+      "scale": {"type": "linear", "zero": true, "rangeMin": 50}
+    },
+    "color": {
+      "field": "Ownership Type",
+      "type": "nominal",
+      "legend": {"format": ""},
+      "scale": {"range": ["Red", "Blue", "Yellow", "Purple"]}
+    },
+    "opacity": {"condition": {"param": "highlight", "value": 1}, "value": 0.2},
+    "tooltip": [
+      {"field": "Ownership Type", "type": "nominal"},
+      {"field": "Number of Records", "type": "quantitative", "format": ","},
+      {"field": "Overall Percentage", "type": "ordinal"}
+    ]
+  }
+}

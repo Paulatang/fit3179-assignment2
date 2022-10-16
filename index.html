@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" type="image/x-icon" href="/logo.svg">
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+    <script src="vega_lite_vis.js"></script>
+    <title>Starbucks Data Visualisation</title>
+
+</head>
+
+<body>
+    <div class="flex title-section">
+        <h1 class="title">STARBUCKS</h1>
+        <img src="logo.svg" />
+    </div>
+    <main>
+
+
+        <section class="about card pad-up flex">
+            <div class="flex gap">
+                <div>
+                    <h2>
+                        About Starbucks
+                    </h2>
+                    <p>
+                        Starbucks established its brand in
+                        <span class="highlight">51</span> years ago where it opened its first store along the
+                        cobblestone
+                        streets of Seattle’s historic Pike Place Market. The variety of products offered for its
+                        customers
+                        to
+                        take
+                        home include fresh-roasted coffee beans, tea, and spices from around the world. Since then,
+                        Starbucks
+                        expanded to other countries in <span class="highlight">34,317</span> locations, and built a
+                        strong
+                        brand
+                        reputation worldwide.
+                    </p>
+                </div>
+                <img src="about-stb.jpg" class="about-img" width="400" />
+            </div>
+            <div id="map" class="pad-up">
+            </div>
+        </section>
+
+
+        <section class="numbers flex pad-up card">
+            <div class="number">
+                <img src="logo.svg" />
+                lospads
+            </div>
+            <div class="number">
+                <img src="logo.svg" />
+
+                lospads
+            </div>
+            <div class="number">
+                <img src="logo.svg" />
+
+                lospads
+            </div>
+        </section>
+
+        <section class="card pad-up">
+            <h2>
+                Background
+            </h2>
+            <p>
+                Starbucks has 4 business ownership types, which are licensed, company owned, joint venture and
+                franchise.
+                <span class="highlight highlight-2">Company owned</span> Starbucks contributed the largest portion of
+                its
+                business, which counts for <span class="highlight">46.61%</span>.
+                Undoubtedly, the <span class="highlight">United States</span> has the greatest number of stores in the
+                world.
+            </p>
+            <div class="flex">
+                <div id="radial_plot">
+                </div>
+
+                <div id="bar_chart_labels">
+                </div>
+            </div>
+        </section>
+
+        <section class="card factors pad-up">
+            <h2>Factors affecting spending amount</h2>
+            <div class="options ">
+                <button class="option button-74">gender</button>
+                <button class="option button-74">age</button>
+                <button class="option button-74">status</button>
+                <button class="option button-74">income</button>
+            </div>
+            <div class="flex gap  pad-up">
+                <p id="description">2
+                </p>
+                <div id="gender" class="hide"></div>
+                <div id="age"></div>
+                <div id="status" class="hide"></div>
+                <div id="income" class="hide"></div>
+            </div>
+        </section>
+
+        <section class="card factors pad-up">
+            <div class="flex gap">
+                <div id="ratings"></div>
+                <p>asdasdasdasdasdasdasda sdasdasdasdasdasdasdasd asdasdasdasdasdasdasdasdasdasdasda </p>
+            </div>
+        </section>
+
+        <section class="card factors pad-up">
+            <div class="flex gap">
+                <p>asdasdasdasdasdasdasda sdasdasdasdasdasdasdasd asdasdasdasdasdasdasdasdasdasdasda </p>
+                <div id="promotionalmethod"></div>
+            </div>
+        </section>
+
+    </main>
+    <footer class="footer flex pad-up">
+        <img src="425554.jpg" height="100" />
+    </footer>
+</body>
+<style>
+    .footer {
+        justify-content: center;
+        background-color: white;
+    }
+
+    .gap {
+        gap: 16px
+    }
+
+    .hide {
+        display: none;
+    }
+
+
+    .pad-up {
+        margin-top: 16px;
+    }
+
+    .card {
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+        padding: 16px;
+        border-radius: 15px;
+        background-color: rgb(241, 220, 186);
+
+    }
+
+    .about {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .about-img {
+        border-radius: 15px;
+    }
+
+    body {
+        margin: 0;
+    }
+
+    .numbers {
+        gap: 16px;
+        justify-content: space-around;
+    }
+
+
+    .title {
+        color: white;
+    }
+
+    .title-section {
+        gap: 10px;
+        justify-content: center;
+        background-color: black;
+        color: white;
+        border-bottom: 5px solid #00754a;
+    }
+
+    .highlight {
+        font-weight: bold;
+    }
+
+    .highlight-2 {
+        color: rgb(68, 117, 173)
+    }
+
+    html {
+        color: #00352A;
+        background-color: white;
+    }
+
+    button,
+    p,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: "sodosans-wf", sans-serif !important;
+    }
+
+    main {
+        width: 874px;
+        margin: auto;
+    }
+
+    .flex {
+        display: flex
+    }
+
+    .vega-bind-name {
+        color: #00352A;
+    }
+
+    /**
+    https://getcssscan.com/css-buttons-examples
+    */
+    .button-74 {
+        min-width: 100px;
+        background-color: #fbeee0;
+        border: 2px solid #422800;
+        border-radius: 30px;
+        box-shadow: #422800 4px 4px 0 0;
+        color: #422800;
+        cursor: pointer;
+        display: inline-block;
+        font-weight: 600;
+        font-size: 18px;
+        padding: 0 18px;
+        line-height: 50px;
+        text-align: center;
+        text-decoration: none;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+    }
+
+    .button-74:hover {
+        background-color: #fff;
+    }
+
+    .button-74:active {
+        box-shadow: #422800 2px 2px 0 0;
+        transform: translate(2px, 2px);
+    }
+
+    @media (min-width: 768px) {
+        .button-74 {
+            min-width: 120px;
+            padding: 0 25px;
+        }
+    }
+
+    @font-face {
+        font-family: 'sodosans-wf';
+        font-style: normal;
+        font-weight: 400;
+        src: url('SoDoSans-Regular.woff2')
+    }
+</style>
+
+</html>

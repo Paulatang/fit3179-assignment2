@@ -1,0 +1,127 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "The relationship between Age and Spend Purchase",
+  "data": {
+    "url": "https://raw.githubusercontent.com/Paulatang/fit3179-assignment2/main/Age.csv"
+  },
+  "transform": [
+    {
+      "aggregate": [{"op": "count", "as": "number of records"}],
+      "groupby": ["age ", "spendPurchase"]
+    },
+    {
+      "stack": "number of records",
+      "groupby": [],
+      "as": ["stack_count_Age1", "stack_count_Age2"],
+      "offset": "normalize",
+      "sort": [{"field": "age ", "order": "ascending"}]
+    },
+    {
+      "window": [
+        {"op": "min", "field": "stack_count_Age1", "as": "x"},
+        {"op": "max", "field": "stack_count_Age2", "as": "x2"},
+        {"op": "dense_rank", "as": "rank_spendPurchase"},
+        {
+          "op": "distinct",
+          "field": "spendPurchase",
+          "as": "distinct_spendPurchase"
+        }
+      ],
+      "groupby": ["age "],
+      "frame": [null, null],
+      "sort": [{"field": "spendPurchase", "order": "ascending"}]
+    },
+    {
+      "window": [{"op": "dense_rank", "as": "rank_Age"}],
+      "frame": [null, null],
+      "sort": [{"field": "age ", "order": "ascending"}]
+    },
+    {
+      "stack": "number of records",
+      "groupby": ["age "],
+      "as": ["y", "y2"],
+      "offset": "normalize",
+      "sort": [{"field": "spendPurchase", "order": "ascending"}]
+    },
+    {
+      "calculate": "datum.y + (datum.rank_spendPurchase - 1) * datum.distinct_spendPurchase * 0.01 / 4",
+      "as": "ny"
+    },
+    {
+      "calculate": "datum.y2 + (datum.rank_spendPurchase - 1) * datum.distinct_spendPurchase * 0.01 / 4",
+      "as": "ny2"
+    },
+    {"calculate": "datum.x + (datum.rank_Age) * 0.01", "as": "nx"},
+    {"calculate": "datum.x2 + (datum.rank_Age) * 0.01", "as": "nx2"},
+    {"calculate": "(datum.nx+datum.nx2)/2", "as": "xc"},
+    {"calculate": "(datum.ny+datum.ny2)/2", "as": "yc"}
+  ],
+  "vconcat": [
+    {
+      "mark": {"type": "text", "baseline": "middle", "align": "center"},
+      "encoding": {
+        "x": {
+          "aggregate": "min",
+          "field": "xc",
+          "title": "Age",
+          "axis": {"orient": "bottom"}
+        },
+        "color": {
+          "field": "age ",
+          "type": "nominal",
+          "legend": {"title": "Age", "orient": "bottom"},
+          "scale": {"range": ["Lightpink", "Lightblue", "BurlyWood", "Plum"]}
+        }
+      }
+    },
+    {
+      "layer": [
+        {
+          "mark": {"type": "rect"},
+          "encoding": {
+            "x": {"field": "nx", "type": "quantitative", "axis": null},
+            "x2": {"field": "nx2"},
+            "y": {"field": "ny", "type": "quantitative"},
+            "y2": {"field": "ny2"},
+            "color": {"field": "age ", "type": "ordinal", "legend": null},
+            "opacity": {
+              "field": "spendPurchase",
+              "type": "ordinal",
+              "legend": null
+            },
+            "tooltip": [
+              {"field": "age ", "type": "ordinal", "title": "Age"},
+              {
+                "field": "spendPurchase",
+                "type": "ordinal",
+                "title": "Spend Purchase"
+              },
+              {
+                "field": "number of records",
+                "type": "quantitative",
+                "title": "Number of records"
+              }
+            ]
+          }
+        },
+        {
+          "mark": {"type": "text", "baseline": "middle"},
+          "encoding": {
+            "x": {"field": "xc", "type": "quantitative", "axis": null},
+            "y": {
+              "field": "yc",
+              "type": "quantitative",
+              "axis": {"title": "Spend Purchase"}
+            },
+            "text": {"field": "spendPurchase", "type": "ordinal"}
+          }
+        }
+      ]
+    }
+  ],
+  "config": {
+    "view": {"stroke": ""},
+    "concat": {"spacing": 0},
+    "axis": {"domain": false, "ticks": false, "labels": false, "grid": false}
+  }
+}

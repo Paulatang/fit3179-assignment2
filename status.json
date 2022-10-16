@@ -1,0 +1,42 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": "transparent",
+  "config": {"style": {"cell": {"stroke": "transparent"}}},
+  "title": "The relationship between status and spend purchase",
+  "width": 300,
+  "height": 200,
+  "data": {
+    "url": "https://raw.githubusercontent.com/Paulatang/fit3179-assignment2/main/status.csv"
+  },
+   "params": [
+    {
+      "name": "highlight",
+      "select": {"type": "point", "on": "mouseover"}
+    },
+    {"name": "select", "select": "point"}
+  ],
+  "mark": {"type": "bar", "cornerRadiusTopLeft": 3, "cornerRadiusTopRight": 3},
+  "encoding": {
+    "x": {"field": "status", "type": "nominal", "title": "Status"},
+    "y": {"aggregate": "count", "title": "Number of records"},
+    "xOffset": {"field": "spendPurchase"},
+    "color": {
+      "field": "spendPurchase",
+      "title": "Spend Purchase",
+      "scale": {"range": ["Red", "Blue", "Yellow", "Purple"]}
+    },
+    "fillOpacity": {
+      "condition": {"param": "select", "value": 1},
+      "value": 0.3
+    },
+    "tooltip": [
+      {"field": "status", "type": "nominal", "title": "Status"},
+      {"field": "spendPurchase", "type": "ordinal", "title": "Spend Purchase"},
+      {
+        "aggregate": "count",
+        "type": "quantitative",
+        "title": "Number of records"
+      }
+    ]
+  }
+}

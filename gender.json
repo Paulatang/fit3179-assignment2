@@ -1,0 +1,69 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": "transparent",
+  "config": {"style": {"cell": {"stroke": "transparent"}},
+  "axis": {"grid": true, "tickBand": "extent"}},
+  "data": {
+    "url": "https://raw.githubusercontent.com/Paulatang/fit3179-assignment2/main/GenderSpending.csv"
+  },
+  "title": "The relationship between gender and spend purchase",
+  "width": 300,
+  "height": 200,
+  "transform": [
+    {
+      "aggregate": [{"op": "count", "as": "num_records"}],
+      "groupby": ["gender", "spendPurchase"]
+    }
+  ],
+  "encoding": {
+    "y": {"field": "gender", "type": "nominal", "title": "Gender"},
+    "x": {
+      "field": "spendPurchase",
+      "type": "ordinal",
+      "title": "Spend Purchase"
+    }
+  },
+  "layer": [
+    {
+      "params": [
+        {
+          "name": "highlight",
+          "select": {"type": "point"}
+        }
+      ],
+      "mark": "rect",
+      "encoding": {
+        "color": {
+          "field": "num_records",
+          "type": "quantitative",
+          "title": "Number of Records",
+          "legend": {"direction": "horizontal", "gradientLength": 120},
+          "scale": {"range": ["Bisque", "BurlyWood", "SaddleBrown"]}
+        },
+      "stroke": {
+      "condition": {
+        "param": "highlight",
+        "empty": false,
+        "value": "black"
+      },
+      "value": null
+    },
+      "opacity": {
+      "condition": {"param": "highlight", "value": 1},
+      "value": 0.5
+    },
+      "order": {"condition": {"param": "highlight", "value": 1}, "value": 0}
+      }
+    },
+    {
+      "mark": "text",
+      "encoding": {
+        "text": {"field": "num_records", "type": "quantitative"},
+        "color": {
+          "condition": {"test": "datum['num_records'] < 20", "value": "black"},
+          "value": "white"
+        }
+      }
+    }
+  ]
+}

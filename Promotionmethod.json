@@ -1,0 +1,58 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": "transparent",
+  "config": {"style": {"cell": {"stroke": "transparent"}}},
+  "data": {
+    "url": "https://raw.githubusercontent.com/Paulatang/fit3179-assignment2/main/Promotionmethod.csv"
+  },
+  "title": "Hear of promotions at Starbucks reviewed by its customers",
+  "width": 300,
+  "height": 200,
+  "encoding": {
+    "x": {
+      "field": "Number of records",
+      "type": "quantitative"
+    },
+    "y": {
+      "field": "Promotion Method",
+      "type": "nominal",
+      "axis": {"offset": 5, "ticks": false, "minExtent": 70, "domain": false}
+    }
+  },
+  "layer": [
+    {
+      "params": [
+        {
+          "name": "gender_highlight",
+          "select": {"type": "point", "fields": ["Gender"]},
+          "bind": "legend"
+        }
+      ],
+      "mark": "line",
+      "encoding": {
+        "detail": {"field": "Promotion Method", "type": "nominal"},
+        "color": {"value": "black"}
+      }
+    },
+    {
+      "mark": {"type": "point", "filled": true},
+      "encoding": {
+        "color": {
+          "field": "Gender",
+          "type": "nominal",
+          "scale": {"range": ["red", "blue"]},
+          "title": "Gender"
+        },
+        "size": {"value": 100},
+        "opacity": {
+          "condition": {"param": "gender_highlight", "value": 1},
+          "value": 0.2
+        },
+        "tooltip": [
+          {"field": "Gender", "type": "nominal"},
+          {"field": "Number of records", "type": "quantitative"}
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": "transparent",
+  "config": {"style": {"cell": {"stroke": "transparent"}}},
+  "title": "The relationship between annual income and spend purchase",
+  "width": 300,
+  "height": 200,
+  "data": {
+    "url": "https://raw.githubusercontent.com/Paulatang/fit3179-assignment2/main/AnnualIncome.csv"
+  },
+  "mark": "bar",
+  "encoding": {
+    "x": {"field": "income", "sort": "-y"},
+    "y": {
+      "aggregate": "count",
+      "type": "quantitative",
+      "title": "Number of records"
+    },
+    "xOffset": {"field": "spendPurchase"},
+    "color": {"field": "spendPurchase", "title": "Spend Purchase",
+    "scale": {"range": ["Red", "Blue", "Yellow", "Purple"]}},
+    "tooltip": [
+      {"field": "income", "type": "ordinal", "title": "Annual Income"},
+      {"field": "spendPurchase", "type": "ordinal", "title": "Spend Purchase"},
+      {
+        "aggregate": "count",
+        "type": "quantitative",
+        "title": "Number of records"
+      }
+    ]
+  }
+}

@@ -6,7 +6,7 @@
   "width": 300,
   "height": 200,
   "data": {
-    "url": "https://raw.githubusercontent.com/Paulatang/fit3179-assignment2/main/cleaned_starbucks.csv",
+    "url": "https://raw.githubusercontent.com/Paulatang/fit3179-assignment2/main/Cleaned%20Starbuck.csv",
     "format": {"type": "csv", "parse": {"Number_of_stores": "number"}}
   },
   "params": [

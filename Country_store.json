@@ -1,0 +1,107 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "background": "transparent",
+  "config": {"style": {"cell": {"stroke": "transparent"}}},
+  "title": "Number of stores of Top 10 countries",
+  "width": 300,
+  "height": 200,
+  "data": {
+    "url": "https://raw.githubusercontent.com/Paulatang/fit3179-assignment2/main/Cleaned%20Starbuck.csv",
+    "format": {"type": "csv", "parse": {"Number_of_stores": "number"}}
+  },
+  "params": [
+    {
+      "name": "Country_selection",
+      "bind": {
+        "input": "select",
+        "options": [
+          null,
+          "United States of America",
+          "China",
+          "Canada",
+          "Japan",
+          "South Korea",
+          "United Kingdom",
+          "Mexico",
+          "Taiwan",
+          "Turkey",
+          "Philippine"
+        ],
+        "labels": [
+          "Show All",
+          "United States of America",
+          "China",
+          "Canada",
+          "Japan",
+          "South Korea",
+          "United Kingdom",
+          "Mexico",
+          "Taiwan",
+          "Turkey",
+          "Philippine"
+        ],
+        "name": "Country selection"
+      }
+    }
+  ],
+  "transform": [
+    {
+      "filter": "Country_selection == null || datum.Country == Country_selection"
+    },
+    {
+      "window": [{"op": "rank", "as": "country_rank"}],
+      "sort": [{"field": "Number_of_stores", "order": "descending"}]
+    },
+    {"filter": "datum.country_rank <= 10"}
+  ],
+  "encoding": {
+    "y": {
+      "field": "Country",
+      "type": "nominal",
+      "sort": {
+        "op": "average",
+        "field": "Number_of_stores",
+        "order": "descending"
+      },
+      "axis": null
+    }
+  },
+  "layer": [
+    {
+      "mark": {"type": "bar", "color": "BurlyWood"},
+      "encoding": {
+        "x": {
+          "field": "Number_of_stores",
+          "type": "quantitative",
+          "title": "Number of stores"
+        }
+      }
+    },
+    {
+      "mark": {"type": "text", "align": "left", "x": 5},
+      "encoding": {
+        "text": {"field": "Country"},
+        "tooltip": [
+          {"field": "Country", "type": "nominal"},
+          {
+            "field": "Number_of_stores",
+            "type": "quantitative",
+            "title": "Number of stores",
+            "format": ","
+          }
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "baseline": "middle",
+        "dx": 160
+      },
+      "encoding": {
+        "text": {"field": "Number_of_stores", "type": "quantitative"}
+      }
+    }
+  ]
+}

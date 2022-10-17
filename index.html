@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" type="image/x-icon" href="/logo.svg">
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+    <script src="vega_lite_vis.js"></script>
+    <title>Starbucks Data Visualisation</title>
+
+</head>
+
+<body>
+    <div class="flex title-section">
+        <h1 class="title">STARBUCKS</h1>
+        <img src="logo.svg" />
+    </div>
+    <main>
+        <section class="about card pad-up flex">
+            <h2>
+                About Starbucks
+            </h2>
+            <div class="flex gap">
+                <article class="about-text">
+                    <p>
+                        Starbucks established its brand in
+                        <span class="highlight">51</span> years ago where it opened its first store along the
+                        cobblestone
+                        streets of Seattle’s historic Pike Place Market.
+                    </p>
+                    <p>
+                        The variety of products offered for its
+                        customers
+                        to
+                        take
+                        home include fresh-roasted coffee beans, tea, and spices from around the world.
+                    </p>
+
+                    <p>
+                        Since then,
+                        Starbucks
+                        expanded to other countries in <span class="highlight">34,317</span> locations, and built a
+                        strong
+                        brand
+                        reputation worldwide.
+                    </p>
+                </article>
+                <img src="about-stb.jpg" class="about-img" width="300" />
+            </div>
+            <div id="map" class="pad-up">
+            </div>
+        </section>
+
+        <section class="card pad-up">
+            <h2>
+                Background
+            </h2>
+            <div class="numbers flex pad-up ">
+                <div>
+                    <article class="center big-number highlight">
+                        4
+                    </article>
+                    <article class="center">
+                        ownership type
+                    </article>
+                </div>
+                <div>
+                    <article class="center big-number highlight">
+                        46.61%
+                    </article>
+                    <article class="center">
+                        company owned
+                    </article>
+                </div>
+                <div>
+                    <article class="center big-number highlight">13,608</article>
+                    <article class="center">
+                        stores in US
+                    </article>
+                </div>
+            </div>
+            <div class="flex pad-up">
+                <div id="radial_plot">
+                </div>
+
+                <div id="bar_chart_labels">
+                </div>
+            </div>
+        </section>
+        <section class="flex area-description">
+            <h1>
+                Customer questionnaire survey
+            </h1>
+            <p>
+                The survey is conducted with <span class="highlight">over 100</span> respondents’ buying behaviours in
+                Starbucks, with their
+                demographics
+                information, perception towards its brand for different categories and hears of promotions in <span
+                    class="highlight">Malaysia</span>.
+            </p>
+        </section>
+
+        <section class="card factors pad-up">
+            <h2>Factors affecting spending amount</h2>
+            <div class="options ">
+                <button class="option button-74 active" data-value="gender">gender</button>
+                <button class="option button-74" data-value="age">age</button>
+                <button class="option button-74" data-value="status">status</button>
+                <button class="option button-74" data-value="income">income</button>
+            </div>
+            <div class="flex gap  pad-up">
+                <article>
+                    <p id="description">
+                    </p>
+                    <pre>
+*0: RM0
+ 1: RM0 - RM20
+ 2: RM20 - RM40
+ 3: RM40 or above
+                    </pre>
+                </article>
+                <div id="gender"></div>
+                <div id="age" class="hide"></div>
+                <div id="status" class="hide"></div>
+                <div id="income" class="hide"></div>
+            </div>
+        </section>
+
+        <section class="card factors pad-up">
+            <h2>Customer perception towards Starbucks
+
+            </h2>
+
+            <div class="flex gap">
+                <div id="ratings"></div>
+                <article>
+                    <p>In general, the majority of customers are satisfied with Starbucks’ products, promotions,
+                        ambiences,
+                        and services and choose options.</p>
+                    <p>However, Starbucks may need to improve its prices and wifi to
+                        retain and gain more purchasers. For example, Starbucks could upgrade its wifi service by
+                        finding a
+                        better internet service provider.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="card factors pad-up">
+            <h2>Promotions received by customers
+            </h2>
+
+            <div class="flex gap">
+                <article>
+                    <p>
+                        <span class="highlight">Social media</span> is the most popular and common platform where
+                        Starbucks promotes its brand
+                        successfully,
+                        while the <span class="highlight">in-store display</span> is the least effective promotional
+                        method.
+                    </p>
+                    <p>Starbucks could therefore put
+                        more resources into social media and improve its in-store display to attract more new customers.
+                    </p>
+                </article>
+                <div id="promotionalmethod"></div>
+            </div>
+        </section>
+
+    </main>
+    <footer class="footer flex pad-up">
+        <article class="grey">
+            Created by Paulatang
+        </article>
+        <img src="425554.jpg" height="100" />
+        <article class="grey">
+            Sourced from Kaggle & Starbucks
+        </article>
+    </footer>
+</body>
+<style>
+    .grey {
+        color: lightgrey;
+    }
+
+    .big-number {
+        font-size: 50px;
+    }
+
+    .center {
+        text-align: center;
+
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    .area-description {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer {
+        justify-content: center;
+        background-color: white;
+        align-items: center;
+    }
+
+    .gap {
+        gap: 16px
+    }
+
+    .hide {
+        display: none;
+    }
+
+
+    .pad-up {
+        margin-top: 16px;
+    }
+
+    .card {
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+        padding: 16px;
+        border-radius: 15px;
+        background-color: rgb(241, 220, 186);
+
+    }
+
+    .about {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .about-text {
+        flex: 1;
+    }
+
+    .about-img {
+        border-radius: 15px;
+        flex: 1;
+    }
+
+    body {
+        margin: 0;
+    }
+
+    .numbers {
+        gap: 16px;
+        justify-content: space-around;
+    }
+
+
+    .title {
+        color: white;
+    }
+
+    .title-section {
+        gap: 10px;
+        justify-content: center;
+        background-color: black;
+        color: white;
+        border-bottom: 5px solid #00754a;
+    }
+
+    .highlight {
+        font-weight: bold;
+        font-family: 'sodosans-bold';
+    }
+
+    .highlight-2 {
+        color: rgb(68, 117, 173)
+    }
+
+    html {
+        color: #00352A;
+        background-color: white;
+    }
+    select,
+    span,
+    button,
+    article,
+    p,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: "sodosans-wf", sans-serif !important;
+    }
+    pre{
+        color:#878787;
+    }
+    main {
+        width: 874px;
+        margin: auto;
+    }
+
+    .flex {
+        display: flex
+    }
+
+    .vega-bind-name {
+        color: #00352A;
+    }
+
+    /**
+    https://getcssscan.com/css-buttons-examples
+    */
+    .button-74 {
+        min-width: 100px;
+        background-color: #fbeee0;
+        border: 2px solid #422800;
+        border-radius: 30px;
+        box-shadow: #422800 4px 4px 0 0;
+        color: #422800;
+        cursor: pointer;
+        display: inline-block;
+        font-weight: 600;
+        font-size: 18px;
+        padding: 0 18px;
+        line-height: 50px;
+        text-align: center;
+        text-decoration: none;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipula tion;
+    }
+
+
+    .button-74:hover,
+    .button-74.active {
+        background-color: #fff;
+    }
+
+    .button-74:active {
+        box-shadow: #422800 2px 2px 0 0;
+        transform: translate(2px, 2px);
+    }
+
+    @media (min-width: 768px) {
+        .button-74 {
+            min-width: 120px;
+            padding: 0 25px;
+        }
+    }
+
+    @font-face {
+        font-family: 'sodosans-wf';
+        font-style: normal;
+        font-weight: 400;
+        src: url('SoDoSans-Regular.woff2')
+    }
+
+    @font-face {
+        font-family: 'sodosans-bold';
+        font-style: normal;
+        font-weight: 700;
+        src: url('SoDoSans-Bold.woff2')
+    }
+</style>
+
+</html>
